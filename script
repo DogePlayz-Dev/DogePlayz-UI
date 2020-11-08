@@ -5,9 +5,7 @@ local module = {}
 local DogeHubGUI = Instance.new("ScreenGui")
 local Main = Instance.new("ImageLabel")
 local Main2 = Instance.new("ScrollingFrame")
-local BoxName = Instance.new("TextBox")
 local UICorner = Instance.new("UICorner")
-local ButtonName = Instance.new("TextButton")
 local UICorner_2 = Instance.new("UICorner")
 local TextName = Instance.new("TextLabel")
 local UIListLayout = Instance.new("UIListLayout")
@@ -39,11 +37,10 @@ Main2.Size = UDim2.new(1, 0, 1, 0)
 Main2.CanvasSize = UDim2.new(0, 0, 1.5, 0)
 Main2.ScrollBarThickness = 0
 
-UICorner.Parent = BoxName
 
 
 
-UICorner_2.Parent = ButtonName
+
 
 
 UIListLayout.Parent = Main2
@@ -55,6 +52,10 @@ UIListLayout.Padding = UDim.new(0.0500000007, 0)
 --Adding Functions
 
 function module:NewBox(Name, func)
+
+    local BoxName = Instance.new("TextBox")
+    UICorner.Parent = BoxName
+
     BoxName.Name = Name
     BoxName.Parent = Main2
     BoxName.BackgroundColor3 = Color3.fromRGB(0, 102, 255)
@@ -69,11 +70,14 @@ function module:NewBox(Name, func)
     BoxName.TextSize = 14.000
     BoxName.TextWrapped = true
 
-    BoxName.
-    
+    BoxName.Text.Changed:Connect(func)
+
 end
 
 function module:NewButton(Name, func)
+    local ButtonName = Instance.new("TextButton")
+    UICorner_2.Parent = ButtonName
+    
     ButtonName.Name = Name
     ButtonName.Parent = Main2
     ButtonName.BackgroundColor3 = Color3.fromRGB(0, 102, 255)
@@ -85,6 +89,10 @@ function module:NewButton(Name, func)
     ButtonName.TextSize = 14.000
     ButtonName.TextWrapped = true
     ButtonName.Text = Name
+
+    ButtonName.MouseButton1Click:Connect(func)
+
+
 end
 
 function module:NewText(Text)
